@@ -1,0 +1,19 @@
+html, body{
+	height: 100%;
+}
+
+.auth_button{
+	min-width: 200px;
+	width: 40%;
+	margin-right: 5px;
+}
+
+.auth_buttons_group{
+    padding-right: -5px;
+}
+
+.hz{
+	height: 500px;
+	width: 500px;
+	background-color: red;
+}
