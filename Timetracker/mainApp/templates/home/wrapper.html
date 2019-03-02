@@ -1,60 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Home</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    {% load static %}
+    <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" sizes="16x16">       <!-- Иконка сайта -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">   <!-- Bootstrap.css -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>   <!-- JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>   <!-- Bootstrap.js -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">   <!-- Иконки -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />   <!-- Static -->
+    
+    </style>
+  </head>
+  <body class="h-100">
 
-	{% load static %}
-	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <nav class="navbar navbar-bordered navbar-expand-sm navbar-dark bg-dark">   <!--  Панель меню -->
+      <a class="navbar-brand" href="#"><i class="far fa-clock"></i> Tt</a>
+      <button class="navbar-toggler" type="btn" data-toggle="collapse" data-target="#navbarNav" >
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">   
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/home"> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My tasks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Journal</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-auto">
+            <a class="nav-link text-white" href="/myprofile">My profile <i class="far fa-user"></i></a>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+    <div class="container-fluid d-inline-block  h-100">
+    
+       {% block content %}   <!-- Тут будет встроен контент -->
+      
 
 
 
-	
 
-</style>
-</head>
-<body>
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-  <a class="navbar-brand" href="#"><i class="far fa-clock"></i> Tt</a>
-  <button class="navbar-toggler" type="btn" data-toggle="collapse" data-target="#navbarNav" >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link" href="#"> Головна</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Мої проекти</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Мої завдання</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Журнал</a>
-      </li>
-    </ul>
-  </div>
-</nav>
 
-	{% block content %}
 
-		
 
-	{% endblock %}
+    {% endblock %}
 
-<footer class="footer font-small-white" id="botfooter">
+    </div>
 
-  <div class="footer  bg-dark" id="botfooter">Система керування проектами   
-  </div>
+    <footer class="footer bg-dark font-small d-flex justify-content-center align-items-center" id="botfooter"> <!-- Футер -->
+      <label class="text-white bg-dark small">Time Tracking System</label>
+    </footer>
 
-</footer>
-
-</body>
+  </body>
 </html>
