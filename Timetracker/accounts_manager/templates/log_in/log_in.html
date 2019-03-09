@@ -6,12 +6,11 @@
 		{% load static %}
 		<link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" >
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">   
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
 		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 	</head>
 	<body>
@@ -22,17 +21,38 @@
 						<img src="{% static 'img/clock2.png' %}" class="img-fluid" alt="#" >
 					</div>
 				</div>
-				<div class="form-group">
-					<input type="email" class="form-control" id="InputEmail" placeholder="Email">
-				</div>
-				<div class="form-group">
-					<input type="password" class="form-control" id="InputEmail" placeholder="Пароль">
+				<form action="/log_in" method="post">
+					{% csrf_token %}
+					
+					<!-- Username -->
+
+					<input type="text" class="form-control m-2 {% if error.0|length > 0 %} border border-danger {% endif %}"
+					placeholder="Username" name="username" required oninvalid="this.setCustomValidity('Input your username')"
+					oninput="setCustomValidity('')">
+
+					{% if error.0|length > 0 %}
+						<small id="RegemailHelp" class="form-text text-danger">{{error.0}}</small>
+					{% endif %} 
+					
+					<!-- Password -->
+
+					<input type="password" class="form-control m-2 {% if error.1|length > 0 %} border border-danger {% endif %}"
+					placeholder="Password" name="password" required oninvalid="this.setCustomValidity('Input your password')"
+					oninput="setCustomValidity('')">
+					{% if error.1 %}
+
+						<small class="form-text text-danger">{{error.1}}</small>
+					{% endif %}
+					
+					<!-- Buttons -->
+
 					<div class="row d-flex justify-content-center">
-						<a href="home" class="auth_button col-4 btn btn-dark mr-2 mt-2">Log in</a>
-						
-						<a href="sign_up" class="auth_button col-4 btn btn-dark mr-2  mt-2">Sign up</a>
-					</div>
+						<button type="submit" class="auth_button col-4 btn btn-dark mr-2 mt-2">Log in</button>
+					</form>
+					<a href="sign_up" class="auth_button col-4 btn btn-dark mr-2  mt-2">Sign up</a>
 				</div>
+				
+				
 			</div>
 		</div>
 	</body>

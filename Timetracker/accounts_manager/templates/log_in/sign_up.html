@@ -15,42 +15,90 @@
 		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 	</head>
 	<body>
-		<div class="d-flex justify-content-center align-items-center h-100">
-			<div class="container vert">
-				<div class="row justify-content-center align-items-center">    <!-- Картинка -->
-				<div class="w-50">
-					<img src="{% static 'img/clock2.png' %}" class="img-fluid" alt="#" >
+		<div class="d-flex row justify-content-center align-items-center h-100 ">
+			<div class="container">
+				<div class="row justify-content-center align-items-center ">    <!-- Image -->
+				<div class="w-50 h-100">
+					<img src="{% static 'img/clock2.png' %}" class="img-fluid"  alt="#" >
 				</div>
 			</div>
-			<div class="form-group">
-				<input type="email" class="form-control" id="InputEmail" placeholder="Email">  <!--  Формы регистрации -->
-			</div>
 			
-			<div class="form-group">
-				<input type="password" class="form-control" id="InputPassword" placeholder="Password">    <!--  Пароль -->
-			</div>
-			<div class="form-group">
-				<input type="password" class="form-control" id="InputEmail" placeholder="Repeat password">  <!--  Повторить пароль -->
-			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" id="InputName" placeholder="Name">    <!-- Имя -->
-			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" id="InputSurname" placeholder="Surname"> <!--  Фамилия -->
-			</div>
-			<div class="form-group">
-				<input type="date" class="form-control" id="InputDate" value="2000-01-01"> <!-- Дата рождения -->
-			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" id="InputDate" placeholder="Function" "> <!-- Дата рождения -->
-			</div>
+			<form action="/sign_up" method="post"   >
+				{% csrf_token %}
+						
+				<!-- Username -->
+						
+				<input type="text" title="Username" class="form-control m-2  {% if error.0 %} border border-danger {% endif %} "   
+				placeholder="Username" name="username" required  oninvalid="this.setCustomValidity('Input your username')"
+				 oninput="setCustomValidity('')"> 
 
-	
-			<div class="row d-flex justify-content-center">
 				
-				<a href="sign_up" class="auth_button col-7 btn btn-dark mr-2  mt-2">Sign up</a>
+				<!-- Email -->
+
+				<input type="email" title="Email" class="form-control m-2  {% if error.1 %} border border-danger {% endif %} "   
+				placeholder="Email"  name="email" required  oninvalid="this.setCustomValidity('Input your email')"
+				 oninput="setCustomValidity('')"> 
+				{% if error.1 %}
+				<small class="form-text text-danger">{{error.1}}</small>
+				{% endif %}
+	
+				<!-- Password -->
+
+				<input type="password" title="Password" class="form-control m-2  {% if error.2 %} border border-danger {% endif %} "   
+				placeholder="Password" name="password" required  oninvalid="this.setCustomValidity('Input your password')"
+				 oninput="setCustomValidity('')"> 
+				{% if error.2 %}
+				<small class="form-text text-danger">{{error.2}}</small>
+				{% endif %}
+
+     			<!-- Name -->
+
+				<input type="text" title="First name" class="form-control m-2  {% if error.3 %} border border-danger {% endif %} "   
+				placeholder="Name" name="first_name" required  oninvalid="this.setCustomValidity('Input your real name')"
+				 oninput="setCustomValidity('')"> 
+				{% if error.3 %}
+				<small class="form-text text-danger">{{error.3}} </small>
+				{% endif %}
+				
+				<!-- Surname -->
+
+				<input type="text" title="Last name"  class="form-control m-2  {% if error.4 %} border border-danger {% endif %} "   
+				placeholder="Surname" name="last_name" required  oninvalid="this.setCustomValidity('Input your real surname')"
+				 oninput="setCustomValidity('')"> 
+				{% if error.4 %}
+				<small class="form-text text-danger">{{error.4}}</small>
+				{% endif %}
+				
+				<!-- Date of birth -->
+
+				<input type="date" value="2000-01-31" title="date of birth" class="form-control m-2  {% if error.5 %} border border-danger {% endif %} "   
+				name="date_of_birth"  required> 
+				{% if error.5 %}
+				<small class="form-text text-danger">{{error.5}}</small>
+				{% endif %}
+				
+				<!-- Function -->
+
+				<input type="text" title="Function" class="form-control m-2  {% if error.6 %} border border-danger {% endif %} "   
+				placeholder="Function" name="user_function"  required> 
+				{% if error.6 %}
+				<small class="form-text text-danger">{{error.6}}</small>
+				{% endif %}
+				
+			
+			
+			
+			
+			<div class="row d-flex justify-content-center">
+				<button type="submit"  class="auth_button col-7 btn btn-dark mr-2  mt-2 mb-3">Sign up</button>
+
 			</div>
+			</form>
 		</div>
 	</div>
+</div>
+
+
+
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en" class="h-100">
   <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Timetracker</title>
     {% load static %}
     <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" sizes="16x16">       <!-- Иконка сайта -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,53 +16,42 @@
     </style>
   </head>
   <body class="h-100">
-
     <nav class="navbar navbar-bordered navbar-expand-sm navbar-dark bg-dark">   <!--  Панель меню -->
-      <a class="navbar-brand" href="#"><i class="far fa-clock"></i> Tt</a>
-      <button class="navbar-toggler" type="btn" data-toggle="collapse" data-target="#navbarNav" >
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">   
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/home"> Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">My projects</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">My tasks</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Journal</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mr-auto">
-            <a class="nav-link text-white" href="/myprofile">My profile <i class="far fa-user"></i></a>
-          </li>
-
-        </ul>
-      </div>
-    </nav>
-    <div class="container-fluid d-inline-block  h-100">
-    
-       {% block content %}   <!-- Тут будет встроен контент -->
-      
-
-
-
-
-
-
-
-    {% endblock %}
-
+    <a class="navbar-brand" href="/home"><i class="far fa-clock"></i> Tt</a>
+    <button class="navbar-toggler" type="btn" data-toggle="collapse" data-target="#navbarNav" >
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/home"> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">My projects</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">My tasks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Journal</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item mr-auto">
+          
+          <a class="nav-link text-white" href="/myprofile"> {{user}} <i class="far fa-user">   </i></a>
+        </li>
+      </ul>
     </div>
-
-    <footer class="footer bg-dark font-small d-flex justify-content-center align-items-center" id="botfooter"> <!-- Футер -->
-      <label class="text-white bg-dark small">Time Tracking System</label>
-    </footer>
-
-  </body>
+  </nav>
+  <div class="container-fluid d-inline-block  h-100">
+    
+    {% block content %}   <!-- Тут будет встроен контент -->
+    
+  {% endblock %}
+</div>
+<footer class="footer bg-dark font-small d-flex justify-content-center align-items-center" id="botfooter"> <!-- Футер -->
+<label class="text-white bg-dark small">Time Tracking System</label>
+</footer>
+</body>
 </html>
