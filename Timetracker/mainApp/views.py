@@ -66,4 +66,4 @@ def uploadProfileImg(request):
 			print("Alarm")
 			print(form.errors)
 
-	return HttpResponse("File did not upload")
+	return HttpResponseRedirect("myprofile")

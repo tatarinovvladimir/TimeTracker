@@ -5,7 +5,7 @@
 	<div class="h-100 h-100 d-flex justify-content-center align-items-center pt-4 pb-4">
 		<div class="container ">
 			<div class="card bg-dark text-white">
-				<div class="card-header row w-100 m-0 d-flex justify-content-between align-items-center">
+				<div class="card-header row w-100 m-0 ">
 					<div class="col-md-10 col-sm-5">
 						<h4 class="card-title text-center">{{user.username}} </h4>
 					</div>
@@ -16,16 +16,16 @@
 				</div>
 				<div class="card-body">
 					
-					<div class=" row h-100 d-flex justify-content-center">
-						<div class=" col-md-6 col-sm-12">
+					<div class=" row ">
+						<div class=" col-md-6  col-sm-12 d-flex  justify-content-center align-items-center pb-2 ">
 							 
 						
-							<img src="/media/{{user.profile.profile_image}}"  class="img-thumbnail border" width="500" height="500" alt="#">
+							<img src="/media/{{user.profile.profile_image}}"  class="img-thumbnail  img-fluid avatar_image"  alt="#">
 							
 						
 						</div>
-						<div class="col-md-6 col-sm-12 ">
-							<table class="table h-100">
+						<div class=" table-responsive-sm col-md-6 col-sm-12 ">
+							<table class="table h-100 w-100 table-hover ">
 								<thead>
 									<tr>
 									</tr>
@@ -66,17 +66,17 @@
 					</div>
 					
 				</div>
-				<div class="card-footer pl-5">
+				<div class="card-footer pr-1">
 					
 					<form action="/upload_profile_img"  method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
 						<div class="row w-100  text-center">
-							<div class="col-md-9 col-sm-12 pb-2 ">
-							<input type="file"  name='avatarimage' id="customFile" >
-							<label class="custom-file-label" id="cflabel" for="customFile">Choose img</label>
+							<div class="col-md-6 col-sm-12 pb-2 ">
+							<input type="file"  name='avatarimage'  id="customFile" >
+							<label class="btn btn-info w-100" id="cflabel" for="customFile">Choose img</label>
 							</div>
-							<div class="col-md-3 col-sm-12 ">
-							<button type="submit" class="btn btn-success w-100">Save image</button>
+							<div class="col-md-6 col-sm-12 ">
+							<button type="submit" class="btn btn-info w-100">Save image</button>
 							</div>
 						</div>
 					</form>

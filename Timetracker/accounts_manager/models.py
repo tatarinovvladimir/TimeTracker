@@ -9,7 +9,7 @@ import os
 
 class Profile(models.Model):
     Custom_User = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_image = models.ImageField(upload_to="avatar", blank=True, null=True)
+    profile_image = models.ImageField(upload_to="avatar", blank=True, null=True, default='avatar/default.jpg')
 
     date_of_birth = models.DateField(blank=True, null=True)
     user_function = models.CharField(max_length=50)
