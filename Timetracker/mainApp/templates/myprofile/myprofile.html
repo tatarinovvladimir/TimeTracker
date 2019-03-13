@@ -1,32 +1,89 @@
 {% extends "home/wrapper.html" %}
+
 {% block content %}
-	<div class="d-flex justify-content-center align-items-center h-100">
+
+	<div class="h-100 h-100 d-flex justify-content-center align-items-center pt-4 pb-4">
 		<div class="container ">
 			<div class="card bg-dark text-white">
-				<div class="card-header row w-100 m-0">
-					<div class="d-flex col-10 justify-content-center  align-items-center">
-						<div>
-							<h4 class="card-title">{{user.username}}</h4>
-						</div>
+				<div class="card-header row w-100 m-0 d-flex justify-content-between align-items-center">
+					<div class="col-md-10 col-sm-5">
+						<h4 class="card-title text-center">{{user.username}} </h4>
 					</div>
-					<a class="btn btn-info col-2" href="/log_out">Log out</a>
-				</div>
-
-				<div class="card-body">
-					<div class="h-100">
+					<div class="col-md-2 col-sm-5">
+						<a class="btn btn-info w-100"  href="/log_out">Log out</a>
+					</div>
 					
-					</div>
-					<img src="/media/{{UserProfile.profile_image}}"  class="img-fluid img-thumbnail border" width="500" height="500" alt="#">
 				</div>
-				<div class="card-footer">
-					<form class="form-inline">
-						<div class="custom-file">
-							<input type="file" class="custom-file-input" id="customFile"  accept="image/*">
-							<label class="custom-file-label" for="customFile">Choose img</label>
+				<div class="card-body">
+					
+					<div class=" row h-100 d-flex justify-content-center">
+						<div class=" col-md-6 col-sm-12">
+							 
+						
+							<img src="/media/{{user.profile.profile_image}}"  class="img-thumbnail border" width="500" height="500" alt="#">
+							
+						
+						</div>
+						<div class="col-md-6 col-sm-12 ">
+							<table class="table h-100">
+								<thead>
+									<tr>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<th scope="row">Username: </th>
+										<td>{{user.username}} </td>
+										
+									</tr>
+									<tr>
+										<th scope="row">Name:</th>
+										<td>{{user.first_name}}</td>
+										
+									</tr>
+									<tr>
+										<th scope="row">Surname: </th>
+										<td>{{user.last_name}}</td>
+									</tr>
+									<tr>
+										<th scope="row">Function: </th>
+										<td>{{user.profile.user_function}}</td>
+									</tr>
+									<tr>
+										<th scope="row">Date of birth: </th>
+										<td>{{user.profile.date_of_birth}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						
+						
+				
+						
+						
+					</div>
+					<div>
+					</div>
+					
+				</div>
+				<div class="card-footer pl-5">
+					
+					<form action="/upload_profile_img"  method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<div class="row w-100  text-center">
+							<div class="col-md-9 col-sm-12 pb-2 ">
+							<input type="file"  name='avatarimage' id="customFile" >
+							<label class="custom-file-label" id="cflabel" for="customFile">Choose img</label>
+							</div>
+							<div class="col-md-3 col-sm-12 ">
+							<button type="submit" class="btn btn-success w-100">Save image</button>
+							</div>
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	{% load static %}
+	<script src="{% static 'js/myprofilescript.js' %}"></script>
 {% endblock %}

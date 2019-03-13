@@ -14,3 +14,6 @@ class Profile(models.Model):
     date_of_birth = models.DateField(blank=True, null=True)
     user_function = models.CharField(max_length=50)
 
+    def __str__(self):
+        return '{} Profile'.format(self.Custom_User.username)
+
