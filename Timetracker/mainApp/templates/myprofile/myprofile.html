@@ -2,15 +2,23 @@
 
 {% block content %}
 
-	<div class="h-100 h-100 d-flex justify-content-center align-items-center pt-4 pb-4">
+	<div class="h-100  d-flex justify-content-center align-items-center pt-4 pb-4">
 		<div class="container ">
 			<div class="card bg-dark text-white">
 				<div class="card-header row w-100 m-0 ">
-					<div class="col-md-10 col-sm-5">
-						<h4 class="card-title text-center">{{user.username}} </h4>
+					<div class=" {% if user.is_staff %} col-md-8 {% else %} col-md-10 {% endif %} col-sm-12">
+
+						<h4 class="card-title text-center  " >{{user.username}} </h4>
 					</div>
-					<div class="col-md-2 col-sm-5">
-						<a class="btn btn-info w-100"  href="/log_out">Log out</a>
+					{% if user.is_staff %}
+					<div class="col-md-2 col-sm-12 pb-2">
+					<a class="btn btn-info w-100 "  href="/admin">Admin panel</a>
+
+					</div>
+					{% endif %}
+					<div class="col-md-2 col-sm-12 ">
+						<a class="btn btn-info w-100 "  href="/log_out">Log out</a>
+
 					</div>
 					
 				</div>

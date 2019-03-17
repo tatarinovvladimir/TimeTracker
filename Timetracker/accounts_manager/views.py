@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .forms import RegisterForm, LoginForm, uploadProfileImgForm, uploadProfileContactForm
+from .forms import RegisterForm, LoginForm, uploadProfileImgForm
 from django.contrib.auth.decorators import login_required
 from .models import Profile
 import os

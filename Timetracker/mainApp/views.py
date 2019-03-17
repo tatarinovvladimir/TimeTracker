@@ -7,7 +7,7 @@ from django.contrib.auth import authenticate, login, logout
 from accounts_manager.models import Profile
 from django.contrib.auth.decorators import login_required
 from mainApp.forms import uploadProfileImgForm
-
+from mainApp.models import Project
 
 import os
 
@@ -67,3 +67,29 @@ def uploadProfileImg(request):
 			print(form.errors)
 
 	return HttpResponseRedirect("myprofile")
+
+@login_required(login_url="/log_in")
+def myprojects(request):
+        UserProfile = getProfile(request.user.username)
+
+        user = User.objects.get(username=request.user.username)
+        title = "My projects"
+        project = Project.objects.filter(developers=UserProfile)
+
+        return render(request, "myprojects/myprojects.html", { "User": user, "title" : title, "project":project})
+
+@login_required(login_url="/log_in")
+def mytasks(request):
+        UserProfile = getProfile(request.user.username)
+        user = User.objects.get(username=request.user.username)
+        title = "My tasks"
+       
+        return render(request, "mytasks/mytasks.html", {'UserProfile':UserProfile, "User": user, "title" : title})
+
+@login_required(login_url="/log_in")
+def journal(request):
+        UserProfile = getProfile(request.user.username)
+        user = User.objects.get(username=request.user.username)
+        title = "Journal"
+     
+        return render(request, "journal/journal.html", {'UserProfile':UserProfile, "User": user, "title" : title})

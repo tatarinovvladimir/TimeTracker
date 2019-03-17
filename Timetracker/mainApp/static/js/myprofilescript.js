@@ -1,1 +1,2 @@
-$("#customFile").hide()
+$("#customFile").hide();
+$(".nav-item").removeClass("active");

@@ -116,7 +116,5 @@ class uploadProfileImgForm(forms.Form):
     AvatarImage = forms.ImageField()
 
 
-class uploadProfileContactForm(forms.Form):
-    first_name = forms.CharField(max_length=30, required=False)
-    last_name = forms.CharField(max_length=30, required=False)
+
 

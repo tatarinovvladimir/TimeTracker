@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'tinymce',
     'django_cleanup',
     'mainApp',
     'accounts_manager',
@@ -127,3 +128,11 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "mainApp/media")
 
 MEDIA_URL = '/media/'
+
+
+TINYMCE_DEFAULT_CONFIG = {
+'plugins':'autoresize'
+
+   
+    
+}

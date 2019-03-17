@@ -1,0 +1,33 @@
+{% extends "home/wrapper.html" %}
+{% block content %}
+	<div class="container-fluid h-100 w-100 pt-2">
+		
+		{% if project|length == 0 %}
+			<div class="d-flex h-100 justify-content-center align-items-center">
+				<div class='text-center'>
+					<div class="pb-5"><i class="far  fa-smile-wink" id="project_image"></i></div> 
+					<div class="h5 ">You are not assigned to any project. Contact your supervisor for an appointment.</div>
+				</div>
+			</div>
+		{% endif %}
+		<div class="row">
+		{% for i in project %}
+			
+				<div class="col-sm-12 col-md-6 col-lg-3 p-3  text-white " >
+					<div class="card  border bg-dark  myclassje border-dark ">
+						<div class="card-body ">
+							<h5 class="card-title text-center ">{{ i.name }}</h5>
+							<p class="card-text text-center text-truncate" title="{{ i.short_description }}">{{ i.short_description }}</p>
+							<a href="{{ i.id }}" class="btn col-12  btn-info">More details</a>
+						</div>
+					</div>
+				</div>
+			
+		{% endfor %}
+		</div>
+		
+		
+	</div>
+	{% load static %}
+	<script src="{% static 'js/myprojectsscrips.js' %}"></script>
+{% endblock %}

@@ -5,6 +5,7 @@
 html,
 body {
   	height: 100%;
+    min-width: 200px;
 }
 .wrapper {
   	display: flex;
@@ -30,3 +31,17 @@ body {
 
 }
 
+.project_container {
+  height: 100px;
+  width: 100px;
+  background-color: red;
+}
+
+.myclassje:hover {
+  /*min-width: 300px !important;*/
+
+}
+
+#project_image {
+  font-size: 100pt;
+}
