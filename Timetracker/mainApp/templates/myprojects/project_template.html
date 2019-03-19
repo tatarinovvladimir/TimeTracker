@@ -3,42 +3,47 @@
 	
 	{% if user.profile in project.developers.all %}
 		
-			<div class="container h-100 pt-4 pb-4">
-				<div class="card  text-lg bg-dark border border-dark text-white">
-					<div class="card-header text-centerh4">
-						{{project.name}}
+		<div class="container h-100 pt-4 pb-4">
+			<div class="card  text-lg bg-dark border border-dark text-white">
+				<div class="card-header text-center h4" >
+					{{project.name}}
+					
+					
+					
+				</div>
+				<div class="card-body overflow-auto bg-white border border-dark ">
+					<h5 class="card-title text-dark"></h5>
+					<div class="text-dark col-12 w-100" >{% autoescape off %}{{ project.full_description }}  {% endautoescape %}</div>
+					
+				</div>
+				<div class="card-footer">
+					<div class="w-100 d-flex justify-content-end text-left">
+						<small>
+						Project developers:
+						{% for i in project.developers.all %}
+							{{ i }},
+						{% endfor %}
 						
-						
-						
-					</div>
-					<div class="card-body overflow-auto bg-white border border-dark ">
-						<h5 class="card-title text-dark"></h5>
-						<div class="text-dark col-12 w-100" >{% autoescape off %}{{ project.full_description }}  {% endautoescape %}</div>
-						
-					</div>
-					<div class="card-footer">
-						<div class="w-100 d-flex justify-content-end text-left">
-							<small>
-							Project developers:
-							{% for i in project.developers.all %}
-								{{ i }},
-							{% endfor %}
-							
-							<br>
-							Project author: {{project.author}}
-							</small>
-						</div>
+						<br>
+						Project author: {{project.author}}
+						</small>
 					</div>
 				</div>
 			</div>
-		
-	{% else %}
-	<div class="container h-100 d-flex justify-content-center align-items-center">
-		<div class='text-center'>
-			<div class="pb-5"><i class="far fa-angry" id="project_image"></i></div>
-			<div class="h5 ">You are not assigned on this project. </div>
 		</div>
+
+	{% else %}
+		<div class="container h-100 d-flex justify-content-center align-items-center">
+			<div class='text-center'>
+				<div class="pb-5"><i class="far fa-angry" id="project_image"></i></div>
+				<div class="h5 ">You are not assigned on this project. </div>
+			</div>
 		</div>
 	{% endif %}
 	
+<script type="text/javascript">
+	var mytitle = "{{ project.name }}";
+</script>
+{% load static %}
+<script src="{% static 'js/project_templatescript.js' %}"></script>
 {% endblock %}

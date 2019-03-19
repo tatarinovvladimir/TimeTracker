@@ -8,7 +8,8 @@ from accounts_manager.models import Profile
 from django.contrib.auth.decorators import login_required
 from mainApp.forms import uploadProfileImgForm
 from mainApp.models import Project
-
+from mainApp.models import Task
+from mainApp.models import Comment
 import os
 
 def getProfile(Username):
@@ -83,8 +84,9 @@ def mytasks(request):
         UserProfile = getProfile(request.user.username)
         user = User.objects.get(username=request.user.username)
         title = "My tasks"
-       
-        return render(request, "mytasks/mytasks.html", {'UserProfile':UserProfile, "User": user, "title" : title})
+       	task = Task.objects.filter(project__developers=UserProfile)
+    
+        return render(request, "mytasks/mytasks.html", {'UserProfile':UserProfile, "User": user, "title" : title, "task" : task})
 
 @login_required(login_url="/log_in")
 def journal(request):

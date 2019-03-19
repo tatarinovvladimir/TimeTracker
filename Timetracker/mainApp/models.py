@@ -13,3 +13,32 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+
+
+
+
+class Task(models.Model):
+
+    topic = models.CharField(max_length=50, blank=False)
+    description = models.TextField(blank=False, max_length=400)
+    start_date = models.DateField(blank=False)
+    end_date = models.DateField(blank=False)
+    task_type = models.CharField(max_length=50, blank=False)
+    priority = models.CharField(max_length=50,choices=(("Normal", "Normal"),("High", "High"),("Extra", "Extra")))
+    estimated_time = models.FloatField(verbose_name="Estimated time in hours", blank=False)
+    #comments - other table
+    # project_performers = models.ManyToManyField(Project,  related_name="performers") 
+    creator = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name="project", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.topic
+
+class Comment(models.Model):
+    comment_for = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
+    comentator = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
+    com_text = models.TextField(max_length=200, blank=False)
+    date = models.DateTimeField(auto_now_add=True, blank=False)
+
+    def __str__(self):
+        return str(self.comentator) + " comment"
