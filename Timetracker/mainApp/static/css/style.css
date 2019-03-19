@@ -22,6 +22,7 @@ body {
 
 .included-content {
 	height: 90%;
+
 }
 
 
@@ -39,5 +40,9 @@ body {
 
 #project_image {
   font-size: 100pt;
+}
+
+#taskelement:hover {
+  opacity: 0.8;
 }
 

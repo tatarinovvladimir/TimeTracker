@@ -21,6 +21,7 @@ from django.views.generic import ListView, DetailView
 from django.conf import settings
 from django.conf.urls.static import static
 from mainApp.models import Project
+from mainApp.models import Task
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,4 +37,6 @@ urlpatterns = [
     path('journal/', views.journal, name = "journal"),
     path('myprojects/<int:pk>/', login_required(DetailView.as_view(model=Project, template_name="myprojects/project_template.html"), 
         login_url='/log_in', )),
+    path('mytasks/<int:pk>/', login_required(DetailView.as_view(model=Task, template_name="mytasks/task_template.html"), 
+        login_url='/log_in', ))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,98 @@
+{% extends "home/wrapper.html" %}
+{% block content %}
+	{% if user.profile in task.project.developers.all %}
+		<div class="container h-100 pt-4 pb-4">
+
+			<!-- Card	 -->
+
+			<div class="card  text-lg bg-dark border border-dark text-white">
+
+				<!-- Header -->
+
+				<div class="card-header text-center h4" >
+					<div class=" text-center text-white h5 m-2 ml-md-5 d-flex  ">
+						<div class="text-center  w-100">
+							{{task.topic}} ({{task.task_type}})
+						</div>
+						<div>
+							<span class="badge {% if task.priority == 'High' %}badge-warning
+								{% elif task.priority == 'Normal' %}  badge-success
+								{% elif task.priority == 'Extra' %} badge-danger
+							{% endif %}">{{task.priority}}</span>
+						</div>
+						
+					</div>
+
+				</div>
+
+				<!-- Body -->
+
+				<div class="card-body overflow-auto bg-white border border-dark ">
+					
+					
+					
+					<div class="text-dark text-center">
+						<h4>Task description</h4>
+						{{ task.description }} <br>
+
+						sdfsdfdsf <br>
+						
+					</div>
+					<div class="row justify-content-end">
+					<!-- Button trigger modal -->
+					<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalLong">
+					<div class="h4  "><i class="fas pt-2 fa-pencil-alt align-bottom"></i></div>
+					</button>
+					
+					</div>
+					<!-- Modal -->
+					{% include 'mytasks/modal_window_edit.html' %}
+					</div>
+
+				<!-- Footer -->
+
+				<div class="card-footer text-center ">
+					<div class=" d-flex flex-row justify-content-between flex-wrap">
+						<div class="text-left col-md-6 d-lg-flex col-xs-12" >
+							<small>
+							Start: {{task.start_date }} <br>
+							Deadline: {{task.end_date }} <br>
+							Estimated time: {{task.estimated_time }} hours
+							</small>
+						</div>
+						<div class="text-left col-md-6 col-xs-12 d-lg-flex justify-content-end">
+							<small>
+							Task performers:
+							{% for i in task.project.developers.all %}
+								{{ i }},
+							{% endfor %}
+							<br>
+							Task creator:
+							{{ task.creator }} <br>
+							Task for: {{ task.project}}
+							
+							<br>
+							
+							</small>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% else %}
+		<div class="container h-100 d-flex justify-content-center align-items-center">
+			<div class='text-center'>
+				<div class="pb-5"><i class="far fa-angry" id="project_image"></i></div>
+				<div class="h5 ">You are not assigned on this task. </div>
+			</div>
+		</div>
+	{% endif %}
+	
+	<script type="text/javascript">
+		var mytitle = "{{ task.topic }}";
+	</script>
+	{% load static %}
+	<!-- We use project_templates script, because it do the same function -->
+	<script src="{% static 'js/project_templatescript.js' %}"></script>
+{% endblock %}

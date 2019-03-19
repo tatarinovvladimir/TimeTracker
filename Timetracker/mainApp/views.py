@@ -10,6 +10,7 @@ from mainApp.forms import uploadProfileImgForm
 from mainApp.models import Project
 from mainApp.models import Task
 from mainApp.models import Comment
+from django.views.generic import *
 import os
 
 def getProfile(Username):
@@ -85,7 +86,7 @@ def mytasks(request):
         user = User.objects.get(username=request.user.username)
         title = "My tasks"
        	task = Task.objects.filter(project__developers=UserProfile)
-    
+       	task = task.order_by('priority')
         return render(request, "mytasks/mytasks.html", {'UserProfile':UserProfile, "User": user, "title" : title, "task" : task})
 
 @login_required(login_url="/log_in")
@@ -95,3 +96,6 @@ def journal(request):
         title = "Journal"
      
         return render(request, "journal/journal.html", {'UserProfile':UserProfile, "User": user, "title" : title})
+
+def hah(DetailView):
+	return render(request, "myprojects/project_template.html")
