@@ -7,13 +7,58 @@
 				<span aria-hidden="true"></span>
 				</button>
 			</div>
-			<div class="modal-body">
-				...
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
+			
+			
+			<div class="modal-body text-dark">
+				<form action="/mytasks/{{task.id}}/" method="POST" >
+					{% csrf_token %}
+					
+					<!-- Topic -->
+
+				<input type="text" class="form-control mb-2"  value="{{task.topic}}" name="topic" placeholder="Topic">
+
+					<!-- Description -->
+
+				<textarea class="form-control mb-2" rows="5"
+				name="description" placeholder="Task description">{{task.description}} </textarea>
+
+					<!-- Start date -->
+
+				<input type="date" class="form-control mb-2" name="start_date" 
+				value='{{task.start_date|date:"Y-m-d"}}' placeholder="Topic">
+
+				<!-- End date -->
+
+				<input type="date" class="form-control mb-2" name="end_date" value="{{task.end_date|date:'Y-m-d'}}" placeholder="Topic">
+
+				<!-- Task type -->
+
+				<input type="text" class="form-control mb-2" value="{{task.task_type}}" name="task_type"  placeholder="Task type">
+
+				<!-- Priority -->
+
+				<div class="mb-2">Priority: {{taskeditform.priority}} </div>
+				
+				<!-- Estimated time -->
+
+				<input type="number" step="0.5" class="form-control mb-2" name="estimated_time" value="{{task.estimated_time}}">
+
+				<!-- Project -->
+
+				<div class="mb-2">Project: {{taskeditform.project}}</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" name="edittaskname" class="btn btn-success">Save changes</button>
+				</div>
+			</form>
+			
+			
 		</div>
 	</div>
 </div>
+<!-- 					<div class="p-5">
+						
+					{{taskeditform.as_p}}
+					
+					</div> -->

@@ -1,0 +1,23 @@
+			
+{% for i in comments %}
+
+	<div class="container-fluid  d-flex pb-4 flex-wrap border-bottom border-top ">
+		<div class="p-3 col-md-2 col-sm-12 ">
+			<div class="row d-flex justify-content-center">
+				<div class="font-weight-bold">{% if i.commentator != None %} {{i.commentator}} {% else %} Deleted User {% endif %}</div>
+			</div>
+			<div class="row d-flex justify-content-center">
+				<div><img class="comment_image rounded-circle" 
+					src="/media/{% if i.commentator != None %}{{ i.commentator.profile_image }}
+					{% else %}/avatar/default.jpg {% endif %}"></div>
+			</div>
+			
+		</div>
+		<div class="pt-3 col-md-10  col-sm-12  d-flex align-items-center flex-wrap ">
+			
+			<div class="col-12  align-items-center text-md-left text-sm-center w-100">
+				{{i.comm_text}}</div>
+				<div class="col-12 text-md-right text-sm-center w-25"><small> {{i.date}}</small></div>
+			</div>
+		</div>
+	{% endfor %}

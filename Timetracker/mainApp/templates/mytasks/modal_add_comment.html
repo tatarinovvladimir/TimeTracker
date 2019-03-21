@@ -1,0 +1,26 @@
+
+<div class="modal" tabindex="-1" id="AddComment" role="dialog" aria-labelledby="AddComment" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title ">Input your comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST" >
+          {% csrf_token %}
+          <textarea class="form-control  w-100 mb-2" rows="5" cols="100"
+          name="comm_text" placeholder="Input your comment"></textarea>
+        </div>
+        
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" name="addcommentname" class="btn btn-dark">Add comment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+

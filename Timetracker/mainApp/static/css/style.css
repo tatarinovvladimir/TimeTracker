@@ -46,3 +46,21 @@ body {
   opacity: 0.8;
 }
 
+/*.comment_image {
+   width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: 1 1;
+
+}*/
+
+
+
+
+.comment_image  {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  object-position: 1 1;
+}
+

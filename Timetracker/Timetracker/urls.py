@@ -37,6 +37,5 @@ urlpatterns = [
     path('journal/', views.journal, name = "journal"),
     path('myprojects/<int:pk>/', login_required(DetailView.as_view(model=Project, template_name="myprojects/project_template.html"), 
         login_url='/log_in', )),
-    path('mytasks/<int:pk>/', login_required(DetailView.as_view(model=Task, template_name="mytasks/task_template.html"), 
-        login_url='/log_in', ))
+    path('mytasks/<int:pk>/', views.mytasksdetail, name='mytasksdetail')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
