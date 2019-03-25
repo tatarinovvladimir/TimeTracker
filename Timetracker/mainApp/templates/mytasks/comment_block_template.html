@@ -4,14 +4,25 @@
 	<div class="container-fluid  d-flex pb-4 flex-wrap border-bottom border-top ">
 		<div class="p-3 col-md-2 col-sm-12 ">
 			<div class="row d-flex justify-content-center">
-				<div class="font-weight-bold">{% if i.commentator != None %} {{i.commentator}} {% else %} Deleted User {% endif %}</div>
+
+				<div class="font-weight-bold">
+					{% if i.commentator != None %} 
+					
+				
+					<div class="{% if i.commentator.Custom_User.groups.all.0 in chief_admin_group %} chief_admin
+					{% elif i.commentator.Custom_User.groups.all.0 in admin_group %} admin
+					{% elif i.commentator.Custom_User.groups.all.0 in moder_group %} moder
+					{% else %} {% endif %}">
+					{{i.commentator}}
+					</div>
+				 {% else %} Deleted User {% endif %}</div>
 			</div>
 			<div class="row d-flex justify-content-center">
 				<div><img class="comment_image rounded-circle" 
 					src="/media/{% if i.commentator != None %}{{ i.commentator.profile_image }}
 					{% else %}/avatar/default.jpg {% endif %}"></div>
 			</div>
-			
+			<div><small>{{i.commentator.Custom_User.groups.all.0}}</small></div>
 		</div>
 		<div class="pt-3 col-md-10  col-sm-12  d-flex align-items-center flex-wrap ">
 			

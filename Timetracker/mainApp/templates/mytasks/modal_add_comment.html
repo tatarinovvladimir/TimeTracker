@@ -9,9 +9,9 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="" method="POST" >
+        <form class="addcomment" action="/mytasks/{{task.id}}/" method="POST" >
           {% csrf_token %}
-          <textarea class="form-control  w-100 mb-2" rows="5" cols="100"
+          <textarea class="form-control  w-100 mb-2 " rows="5" cols="100"
           name="comm_text" placeholder="Input your comment"></textarea>
         </div>
         

@@ -16,48 +16,48 @@
     </style>
   </head>
   <body class="w-100">
-
     <div class="wrapper">
       <div class="content">
-    <nav class="navbar navbar-bordered navbar-expand-sm navbar-dark bg-dark">   <!--  Nav panel -->
-    <a class="navbar-brand" href="/home"><i class="far fa-clock"></i> Tt</a>
-    <button class="navbar-toggler" type="btn" data-toggle="collapse" data-target="#navbarNav" >
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item ">
-          <a class="nav-link" href="/home" id="home_id"> Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/myprojects" id="myprojects_id">My projects</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/mytasks" id="mytasks_id">My tasks</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/journal" id="journal_id">Journal</a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item mr-auto">
-          
-          <a class="nav-link active" href="/myprofile" id="user"> {{user}} <i class="far fa-user">   </i></a>
-        </li>
-      </ul>
+        <nav class="navbar navbar-bordered navbar-expand-sm navbar-dark bg-dark">   <!--  Nav panel -->
+        <a class="navbar-brand" href="/home"><i class="far fa-clock"></i> Tt</a>
+        <button class="navbar-toggler" type="btn" data-toggle="collapse" data-target="#navbarNav" >
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item ">
+              <a class="nav-link" href="/home" id="home_id"> Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/myprojects" id="myprojects_id">My projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/mytasks" id="mytasks_id">My tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/journal" id="journal_id">Journal</a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-auto">
+              
+              <a class="nav-link active" href="/myprofile" id="user"> {{user}} <i class="far fa-user">   </i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      
+      <div class="container-fluid included-content">
+        {% block content %}   <!-- Content will inckude here -->
+        
+      {% endblock %}
     </div>
-  </nav>
- 
-    <div class="conteiner-fluid included-content">
-    {% block content %}   <!-- Content will inckude here -->
-    
-  {% endblock %}
   </div>
-</div>
-<div class="footer bg-dark font-small text-center text-white botfooter" > <!-- Footer -->
-Time Tracking System
+  <div class="footer bg-dark font-small text-center text-white botfooter" >
+    <div class="d-flex h-100 align-items-center "><!-- Footer -->
+    <div class="text-center w-100 "><a href="#" class="text-white">Time Tracking System</a></div>
+  </div>
 </div>
 </div>
 </body>
 </html>
-

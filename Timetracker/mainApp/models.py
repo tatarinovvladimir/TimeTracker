@@ -14,8 +14,15 @@ class Project(models.Model):
         return self.name
 
 
+class NewsPost(models.Model):
+    name = models.CharField(max_length=50, blank=False)
+    text = tn_models.HTMLField(blank=False)
+    sender = models.ForeignKey(Profile,  on_delete=models.CASCADE)
+    date = models.DateTimeField(default=dt.datetime.now, blank=False)
+    limitation_time = models.IntegerField(verbose_name="Actual time for post (in days)", blank=True, null=True)
 
-
+    def __str__(self):
+        return self.name
 
 class Task(models.Model):
 
@@ -26,8 +33,7 @@ class Task(models.Model):
     task_type = models.CharField(max_length=50, blank=False)
     priority = models.CharField(max_length=50,choices=(("Normal", "Normal"),("High", "High"),("Extra", "Extra")))
     estimated_time = models.FloatField(verbose_name="Estimated time in hours", blank=False)
-    #comments - other table
-    # project_performers = models.ManyToManyField(Project,  related_name="performers") 
+
     creator = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     project = models.ForeignKey(Project, related_name="project", on_delete=models.CASCADE)
 
@@ -42,3 +48,13 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.commentator) + " comment for " + str(self.comment_for)
+
+class JournalPost(models.Model):
+    post_date = models.DateTimeField(default=dt.datetime.now, blank=False)
+    used_time = models.FloatField(blank=False, null=True)
+    post_text = models.TextField(blank=False, max_length=400)
+    for_task = models.ForeignKey(Task, on_delete=models.CASCADE, null=True)
+    made_by = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return str(self.made_by) + " journal post"

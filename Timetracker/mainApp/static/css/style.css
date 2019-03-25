@@ -46,13 +46,6 @@ body {
   opacity: 0.8;
 }
 
-/*.comment_image {
-   width: 100px;
-  height: 100px;
-  object-fit: cover;
-  object-position: 1 1;
-
-}*/
 
 
 
@@ -64,3 +57,25 @@ body {
   object-position: 1 1;
 }
 
+.asd {
+  max-height: 84vh;
+}
+
+.te {
+  word-wrap: break-word;
+}
+
+.chief_admin {
+  color: #f20101;
+  font-weight: bold;
+}
+
+.admin {
+  color: #00aa0c;
+  font-weight: bold;
+}
+
+.moder {
+  color: #f19300;
+  font-weight: bold;
+}

@@ -1,9 +1,39 @@
 {% extends "home/wrapper.html" %}
 {% block content %}
-	<div class="container-fluid d-flex h-100 justify-content-center align-items-center">
-		<div>
-			Journal in work
-			
+	<div class="container  justify-content-center  w-100  rounded  ">
+		<div class="w-100 row justify-content-center  mx-auto pt-3 h3">
+			<div class=" ml-auto col-sm-12 col-md-auto my-1">Journal log</div>
+			<div class="ml-auto btn btn-dark col-sm-12 col-md-auto my-1" data-toggle="modal" data-target="#addnote">Add note</div>
+			{% include "journal/add_note_template.html" %}
+		</div>
+		<div class="row ">
+			<div class=" row mx-auto table-responsive-sm w-100 py-2 ">
+				
+				<table class="table   table-hover h-100  text-center">
+					
+					<thead>
+						<tr >
+							<th>Date</th>
+							<th >Time</th>
+							<th >Task</th>
+							<th >Comment</th>
+							<th >Username</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for i in journalpost %}
+							<tr class="border-top border-bottom">
+								<td class="">{{ i.post_date }}</td>
+								<td >{{ i.used_time }} hours</td>
+								<td >{{ i.for_task }}</td>
+								<td >{{ i.post_text }}</td>
+								<td >{{ i.made_by }}</td>
+							</tr>
+						{% endfor %}
+						
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 	{% load static %}

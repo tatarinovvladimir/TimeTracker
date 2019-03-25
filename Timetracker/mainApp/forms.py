@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from mainApp.models import Task
 from mainApp.models import Comment
+from mainApp.models import JournalPost
 
 
 class uploadProfileImgForm(forms.Form):
@@ -18,6 +19,14 @@ class AddComentForm(forms.ModelForm):
         model = Comment
         fields = ['comm_text']
         exclude = ['commentator', 'comment_for']
+
+class AddNoteForm(forms.ModelForm):
+    class Meta:
+        model = JournalPost
+        fields = ["used_time", "post_text", "for_task"]
+        exclude = ['post_date', 'made_by']
+
+
 
 
 
