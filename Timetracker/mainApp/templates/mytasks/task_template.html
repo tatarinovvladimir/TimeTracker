@@ -22,11 +22,21 @@
 				<!-- Body -->
 				<div class="card-body overflow-auto bg-white border border-dark ">
 					
-					<div class="row justify-content-end">
+					<div class="row justify-content-end w-100">
+						<!-- Button trigger modal info -->
+
+						<button type="button" class="btn align-center btn-dark m-2" data-toggle="modal" data-target="#info">
+						<div class="h4  "><i class="fas fa-info align-bottom"></i></div>
+						</button>
+						<div>{% include 'mytasks/info_modal.html' %}</div>
+
 						<!-- Button trigger modal comment -->
-						<button type="button" class="btn btn-dark" data-toggle="modal" data-target="#exampleModalLong">
+
+						<button type="button" class="btn  m-2 btn-dark" data-toggle="modal" data-target="#exampleModalLong">
 						<div class="h4  "><i class="fas pt-2 fa-pencil-alt align-bottom"></i></div>
 						</button>
+
+
 						<!-- Window Edit -->
 						<div class="text-left mb-4">{% include 'mytasks/modal_window_edit.html' %}</div>
 						
@@ -35,6 +45,7 @@
 					<div class="text-dark text-center">
 						<h4>Task description</h4>
 						{{ task.description }} <br>
+					
 						<br>
 						
 						
@@ -71,30 +82,11 @@
 				</div>
 				<!-- Footer -->
 				<div class="card-footer text-center ">
-					<div class=" d-flex flex-row justify-content-between flex-wrap">
-						<div class="text-left col-md-6 d-lg-flex col-xs-12" >
-							<small>
-							Start: {{task.start_date }} <br>
-							Deadline: {{task.end_date }} <br>
-							Estimated time: {{task.estimated_time }} hours
-							</small>
-						</div>
-						<div class="text-left col-md-6 col-xs-12 d-lg-flex justify-content-end">
-							<small>
-							Task performers:
-							{% for i in task.project.developers.all %}
-								{{ i }},
-							{% endfor %}
-							<br>
-							Task author:
-							{{ task.creator }} <br>
-							Task for: {{ task.project}}
-							
-							<br>
-							
-							</small>
-							
-						</div>
+					<div class=" d-flex flex-row justify-content-center flex-wrap">
+
+
+						<small>{{task.project}}</small>
+						
 					</div>
 				</div>
 			</div>

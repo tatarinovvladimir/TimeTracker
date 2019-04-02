@@ -1,30 +1,32 @@
 {% extends "home/wrapper.html" %}
 {% block content %}
-{% if task|length == 0 %}
-			<div class="d-flex h-100 justify-content-center align-items-center">
-				<div class='text-center'>
-					<div class="pb-5"><i class="far fa-check-circle text-center" id="project_image"></i></div> 
-					<div class="h5 ">You have no tasks. It's time to relax!</div>
-				</div>
-			</div>
 
-		{% endif %}
+	{% if task|length == 0 and not user.is_staff %}
+		<div class="d-flex h-100 justify-content-center align-items-center">
+			<div class='text-center'>
+				<div class="pb-5"><i class="far fa-check-circle text-center" id="project_image"></i></div>
+				<div class="h5 ">You have no tasks. It's time to relax!</div>
+			</div>
+		</div>
+	{% endif %}
 	<div class="container pt-4 pb-4">
-			
-			{% for i in task %}
+		
+		{% for i in task %}
+
+			{% if user.profile in i.implementers.all %}
 			<div class="card m-2">
 				<div class="card-header bg-dark " id="taskelement" data-toggle="collapse" data-target="#collapse{{i.id}}"
 					aria-expanded="true" aria-controls="collapse{{i.id}}" >
 					
 					<div class=" text-center text-white h5 m-2  d-flex  ">
 						<div class="text-center w-100">
-							 {{i.project}}   <i class="fas fa-angle-double-right"></i> {{i}}
+							{{i.project}}   <i class="fas fa-angle-double-right"></i> {{i}}
 						</div>
 						<div>
 							<span class="badge {% if i.priority == 'High' %}badge-warning
 								{% elif i.priority == 'Normal' %}  badge-success
 								{% elif i.priority == 'Extra' %} badge-danger
-								{% endif %}">{{i.priority}}</span>
+							{% endif %}">{{i.priority}} </span>
 						</div>
 						
 					</div>
@@ -33,19 +35,40 @@
 				<div id="collapse{{i.id}}" class="collapse "  >
 					<div class="card-body border border-dark text-center text-truncate">
 						
-						{{i.description}} 
-				
+						{{i.description}}
+						
 						<div class="row justify-content-end pt-4">
-						<a href="{{i.id}}" class="pr-2 " >
+							<a href="{{i.id}}" class="pr-2 " >
 							<button class="btn ml-auto col-12 btn-dark"> More Details</button></a>
 						</div>
 					</div>
 				</div>
 			</div>
-			{% endfor %}
-		
-	</div>
+			{% endif %}
+		{% endfor %}
 
-		{% load static %}
-		<script src="{% static 'js/mytasksscript.js' %}"></script>
-	{% endblock %}
+		{% if user.is_staff %}
+		{% include 'mytasks/task_add_form.html' %}
+		<a  data-toggle="modal" data-target="#addtask">
+			<div class="card m-2  addproject border">
+				<div class="card-header   addproject  "  >
+					<!-- Window add -->
+					
+
+					<div class=" text-center  text-muted h5 m-2   ">
+						<div class="text-center add_project_text w-100">
+							<i class="fas fa-plus"></i>
+						</div>
+						
+						
+					</div>
+					
+				</div>
+				
+			</div>
+		</a>
+		{% endif %}
+	</div>
+	{% load static %}
+	<script src="{% static 'js/mytasksscript.js' %}"></script>
+{% endblock %}

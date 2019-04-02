@@ -30,12 +30,15 @@ class Task(models.Model):
     description = models.TextField(blank=False, max_length=400)
     start_date = models.DateField(blank=False )
     end_date = models.DateField(blank=False)
-    task_type = models.CharField(max_length=50, blank=False)
+    task_type = models.CharField(max_length=50, blank=False, choices=(('Bug', 'Bug'), ('Feature', 'Feature')) )
     priority = models.CharField(max_length=50,choices=(("Normal", "Normal"),("High", "High"),("Extra", "Extra")))
     estimated_time = models.FloatField(verbose_name="Estimated time in hours", blank=False)
-
-    creator = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    implementers = models.ManyToManyField(Profile, related_name="implementers")
+    creator = models.ForeignKey(Profile,  null=True, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, related_name="project", on_delete=models.CASCADE)
+
+
+
 
     def __str__(self):
         return self.topic

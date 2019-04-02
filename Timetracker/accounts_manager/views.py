@@ -86,7 +86,16 @@ def sign_up(request):
 			print("not good")
 		
 			# Procces errors
-	
+			
+
+
+			fusername = user['username'].value()
+			femail = user['email'].value()
+			fname = user['first_name'].value()
+			fsurname = user['last_name'].value()
+			fdate = user['date_of_birth'].value()
+			ffunction = user['user_function'].value()
+
 			username_error = user['username'].errors 
 			email_error = user['email'].errors 
 			password_error = user['password'].errors 
@@ -96,7 +105,8 @@ def sign_up(request):
 			user_function_error = user['user_function'].errors
 			error = [username_error, email_error, password_error, first_name_error, last_name_error, date_of_birth_error, user_function_error]
 
-			return render(request, 'log_in/sign_up.html', {'error': error})
+			return render(request, 'log_in/sign_up.html', {'error': error, 'fusername' : fusername, 'femail' : femail, 'fname' : fname, 
+				'fsurname' : fsurname, 'fdate' : fdate, 'ffunction' : ffunction})
 				                                     
 
 	else:

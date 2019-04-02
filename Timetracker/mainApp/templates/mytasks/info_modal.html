@@ -1,0 +1,32 @@
+<div class="modal fade" tabindex="-1" id="info" role="dialog" aria-labelledby="AddComment" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h5 class="modal-title text-dark">{{task.topic}} info</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body text-dark">
+        
+        Start: {{task.start_date }} <br>
+        Deadline: {{task.end_date }} <br>
+        Estimated time: {{task.estimated_time }} hours <br>
+        Used time: {{hours}} hours. <br>
+        Task performers:
+        {% for i in task.implementers.all %}
+          {{ i }},
+        {% endfor %}
+        <br>
+        Task author:
+        {{ task.creator }} <br>
+        Task for: {{ task.project}}
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>

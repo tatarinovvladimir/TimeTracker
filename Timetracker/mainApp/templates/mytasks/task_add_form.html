@@ -1,0 +1,70 @@
+<div class="modal fade" id="addtask" tabindex="-1" role="dialog" aria-labelledby="addtask" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-dark" id="addtask">Input changes</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true"></span>
+				</button>
+			</div>
+			
+			
+			<div class="modal-body text-dark">
+				<form  method="POST" >
+					{% csrf_token %}
+					
+					<!-- Topic -->
+
+				<input type="text" class="form-control mb-2" required  name="topic" placeholder="Topic">
+
+					<!-- Description -->
+
+				<textarea class="form-control mb-2" required rows="5"
+				name="description" required > Description</textarea>
+
+					<!-- Start date -->
+
+				<input type="date" required class="form-control mb-2" name="start_date" 
+				value="2000-01-21" placeholder="Topic">
+
+				<!-- End date -->
+
+				<input type="date" class="form-control mb-2" required name="end_date" value="2000-01-22" placeholder="Topic">
+				
+				<!-- Estimated time -->
+
+				<input type="number" placeholder="Used time" step="0.5" class="form-control mb-2" required name="estimated_time" >
+
+				<!-- Task type -->
+
+				<div class="mb-2">Task type: {{addform.task_type}} </div>
+
+				<!-- Priority -->
+
+				<div class="mb-2">Priority: {{addform.priority}} </div>
+				
+				
+
+				<!-- Implemeners -->
+				
+				<div class="mb-2">Implementers: {{addform.implementers}}</div>
+
+				<!-- Project -->
+
+				<div class="mb-2">Project: {{addform.project}}</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" name="addform" class="btn btn-success">Save</button>
+				</div>
+			</form>
+			
+			
+		</div>
+	</div>
+</div>
+<!-- 					<div class="p-5">
+						
+					{{taskeditform.as_p}}
+					
+					</div> -->

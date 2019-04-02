@@ -13,8 +13,10 @@ from mainApp.models import NewsPost
 from mainApp.models import Comment
 from mainApp.models import JournalPost
 from mainApp.forms import TaskEditForm
+from mainApp.forms import TaskAddForm
 from mainApp.forms import AddComentForm
 from mainApp.forms import AddNoteForm
+
 from django.core.mail import send_mail
 from django.conf import settings
 import os
@@ -52,11 +54,11 @@ def uploadProfileImg(request):
     print("asdasd")
 
     if request.method == 'POST':
-        print("request is POST")
+
         form = uploadProfileImgForm(data=request.POST, files=request.FILES)
 
         if form.is_valid():
-            print("sdfdsf")
+
             user  = User.objects.get(username=request.user.username)
             user.profile.profile_image = form.cleaned_data["avatarimage"]
             user.profile.save()
@@ -64,7 +66,7 @@ def uploadProfileImg(request):
             return HttpResponseRedirect("myprofile")
 
         else:
-            print("Alarm")
+
             print(form.errors)
 
     return HttpResponseRedirect("myprofile")
@@ -77,6 +79,7 @@ def myprojects(request):
         title = "My projects"
         project = Project.objects.filter(developers=user.profile)
 
+
         return render(request, "myprojects/myprojects.html", { "User": user, "title" : title, "project":project})
 
 @login_required(login_url="/log_in")
@@ -84,25 +87,47 @@ def mytasks(request):
 
         user = User.objects.get(username=request.user.username)
         title = "My tasks"
-        task = Task.objects.filter(project__developers=user.profile).order_by('priority')
+        task = Task.objects.filter(implementers=user.profile).order_by('priority')
+        addform = TaskAddForm()
 
-        return render(request, "mytasks/mytasks.html", {"User": user, "title" : title, "task" : task})
+
+        if request.POST:
+            addform = TaskAddForm(request.POST)
+            print("post")
+
+            if addform.is_valid():
+                print("valid")
+
+                newaddform = addform.save(commit=False)
+                
+                newaddform.creator = user.profile
+                newaddform.save()
+                addform.save_m2m()
+                
+                print(addform)
+                
+
+                return HttpResponseRedirect(request.path)
+            else:
+                return HttpResponseRedirect(request.path)
+
+        return render(request, "mytasks/mytasks.html", {"User": user, "title" : title, "task" : task, 'addform' : addform})
 
 @login_required(login_url="/log_in")
 def journal(request):
 
         user = User.objects.get(username=request.user.username)
         title = "Journal"
-        journalpost = JournalPost.objects.filter(for_task__project__developers=user.profile).order_by('-post_date')[:50]
+        journalpost = JournalPost.objects.filter(for_task__implementers=user.profile).order_by('-post_date')[:50]
         addnoteform = AddNoteForm()
        
         addnoteform.fields["for_task"].queryset = Task.objects.filter(project__developers=user.profile)
 
         if request.POST:
-            print(1)
+
             addnoteform = AddNoteForm(request.POST)
             if addnoteform.is_valid():
-                print(2)
+
                 addnoteform = addnoteform.save(commit=False)
                 addnoteform.made_by = user.profile
                 addnoteform.save()
@@ -122,6 +147,10 @@ def mytasksdetail(request, pk):
         admin_group = Group.objects.filter(name="Administrator")
         moder_group = Group.objects.filter(name="Moderator")
         comments = Comment.objects.filter(comment_for=task).order_by('-date')
+        journal = JournalPost.objects.filter(for_task=task)
+        hours = 0
+        for i in journal:
+            hours += i.used_time
 
 
         user = User.objects.get(username=request.user.username)
@@ -175,4 +204,5 @@ def mytasksdetail(request, pk):
             return HttpResponseRedirect(request.path)
 
         return render(request, "mytasks/task_template.html", {'task' : task,  "User": user, "taskeditform" : taskeditform, 
-            'comments' : comments, "chief_admin_group" : chief_admin_group, "admin_group":admin_group, "moder_group":moder_group})
+            'comments' : comments, "chief_admin_group" : chief_admin_group, "admin_group":admin_group, "moder_group":moder_group,
+            'hours' : hours})
