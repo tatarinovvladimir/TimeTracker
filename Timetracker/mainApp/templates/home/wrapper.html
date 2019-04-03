@@ -28,10 +28,10 @@
               <a class="nav-link" href="/home" id="home_id"> Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/myprojects" id="myprojects_id">My projects</a>
+              <a class="nav-link" href="/myprojects" id="myprojects_id"> {% if not user.is_staff %} My projects {% else %} Projects {% endif %}</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/mytasks" id="mytasks_id">My tasks</a>
+              <a class="nav-link" href="/mytasks" id="mytasks_id">{% if not user.is_staff %} My tasks {% else %} Tasks {% endif %}</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/journal" id="journal_id">Journal</a>

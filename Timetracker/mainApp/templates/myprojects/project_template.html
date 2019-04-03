@@ -1,7 +1,7 @@
 {% extends "home/wrapper.html" %}
 {% block content %}
 	
-	{% if user.profile in project.developers.all %}
+	{% if user.profile in project.developers.all or user.is_staff %}
 		
 		<div class="container h-100 pt-4 pb-4">
 			<div class="card  text-lg bg-dark border border-dark text-white">

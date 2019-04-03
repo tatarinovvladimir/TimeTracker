@@ -13,7 +13,7 @@
 		
 		{% for i in task %}
 
-			{% if user.profile in i.implementers.all %}
+
 			<div class="card m-2">
 				<div class="card-header bg-dark " id="taskelement" data-toggle="collapse" data-target="#collapse{{i.id}}"
 					aria-expanded="true" aria-controls="collapse{{i.id}}" >
@@ -44,7 +44,7 @@
 					</div>
 				</div>
 			</div>
-			{% endif %}
+
 		{% endfor %}
 
 		{% if user.is_staff %}

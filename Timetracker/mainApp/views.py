@@ -77,7 +77,11 @@ def myprojects(request):
 
         user = User.objects.get(username=request.user.username)
         title = "My projects"
-        project = Project.objects.filter(developers=user.profile)
+
+        if request.user.is_staff:
+            project = Project.objects.filter()
+        else:
+            project = Project.objects.filter(developers=user.profile)
 
 
         return render(request, "myprojects/myprojects.html", { "User": user, "title" : title, "project":project})
@@ -87,8 +91,14 @@ def mytasks(request):
 
         user = User.objects.get(username=request.user.username)
         title = "My tasks"
-        task = Task.objects.filter(implementers=user.profile).order_by('priority')
+        if request.user.is_staff:
+            task = Task.objects.filter().order_by('priority')
+            print("staff")
+        else:
+            task = Task.objects.filter(implementers=user.profile, project__developers=user.profile).order_by('priority')
+
         addform = TaskAddForm()
+
 
 
         if request.POST:
@@ -118,10 +128,16 @@ def journal(request):
 
         user = User.objects.get(username=request.user.username)
         title = "Journal"
-        journalpost = JournalPost.objects.filter(for_task__implementers=user.profile).order_by('-post_date')[:50]
+        if request.user.is_staff:
+            journalpost = JournalPost.objects.filter().order_by('-post_date')[:100]
+        else:
+            journalpost = JournalPost.objects.filter(made_by=user.profile).order_by('-post_date')[:50]
+
         addnoteform = AddNoteForm()
        
-        addnoteform.fields["for_task"].queryset = Task.objects.filter(project__developers=user.profile)
+        addnoteform.fields["for_task"].queryset = Task.objects.filter(implementers=user.profile, project__developers=user.profile)
+        print(request.user.profile)
+        print(request.user.is_staff)
 
         if request.POST:
 

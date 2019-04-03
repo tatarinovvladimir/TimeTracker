@@ -34,7 +34,7 @@ class Task(models.Model):
     priority = models.CharField(max_length=50,choices=(("Normal", "Normal"),("High", "High"),("Extra", "Extra")))
     estimated_time = models.FloatField(verbose_name="Estimated time in hours", blank=False)
     implementers = models.ManyToManyField(Profile, related_name="implementers")
-    creator = models.ForeignKey(Profile,  null=True, on_delete=models.CASCADE)
+    creator = models.ForeignKey(Profile, editable=False, null=True, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, related_name="project", on_delete=models.CASCADE)
 
 
