@@ -13,6 +13,17 @@
 				<form  method="POST" >
 					{% csrf_token %}
 					
+
+
+
+					
+
+					
+
+					
+
+						
+
 					<!-- Topic -->
 
 				<input type="text" class="form-control mb-2" required value="{{task.topic}}" name="topic" placeholder="Topic">
@@ -31,25 +42,41 @@
 
 				<input type="date" class="form-control mb-2" required name="end_date" value="{{task.end_date|date:'Y-m-d'}}" placeholder="Topic">
 
+				<!-- Estimated time -->
+
+				<input type="number" step="0.5" class="form-control mb-2" id="sdfd" required name="estimated_time" value="{{task.estimated_time}}">
+
 				<!-- Task type -->
 
-				<div class="mb-2">Task type: {{taskeditform.task_type}} </div>
+				<select name="task_type" required class="form-control mb-2"  >
+						{% for i in taskeditform.task_type %}
+							{{i}}
+						{% endfor %}
+				</select> 
+
 
 				<!-- Priority -->
 
-				<div class="mb-2">Priority: {{taskeditform.priority}} </div>
+				<select name="priority" required class="form-control mb-2"  >
+						{% for i in taskeditform.priority %}
+							{{i}}
+						{% endfor %}
+				</select> 
 				
-				<!-- Estimated time -->
-
-				<input type="number" step="0.5" class="form-control mb-2" required name="estimated_time" value="{{task.estimated_time}}">
+				
 
 				<!-- Project -->
 
-				<div class="mb-2">Project: {{taskeditform.project}}</div>
+				<select name="project" required class="form-control mb-2"  >
+						{% for i in taskeditform.project %}
+							{{i}}
+
+						{% endfor %}
+				</select> 
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" name="edittaskname" class="btn btn-success">Save</button>
+					<button type="submit" name="edittaskname" class="btn btn-success">Save changes</button>
 				</div>
 			</form>
 			

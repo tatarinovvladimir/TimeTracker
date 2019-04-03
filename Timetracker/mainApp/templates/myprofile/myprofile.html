@@ -16,6 +16,7 @@
 
 					</div>
 					{% endif %}
+					
 					<div class="col-md-2 col-sm-12 ">
 						<a class="btn btn-info w-100 "  href="/log_out">Log out</a>
 
@@ -68,8 +69,8 @@
 											<td class="chief_admin">{{user.groups.all.0}}</td>					
 										{% elif user.groups.all.0 in admin_group %}
 											<td class="admin">{{user.groups.all.0}}</td>
-										{% elif user.groups.all.0 in moder_group %}
-											<td class="moder">{{user.groups.all.0}}</td>	
+										<!-- elif user.groups.all.0 in moder_group 
+											<td class="moder">{{user.groups.all.0}}</td> -->	<!-- Deleted in v.1.2 -->
 										{% else %}
 										<td>User</td>
 										{% endif %}

@@ -2,7 +2,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title text-dark" id="addtask">Input changes</h5>
+				<h5 class="modal-title text-dark" id="addtask">Creating new task</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				<span aria-hidden="true"></span>
 				</button>
@@ -14,57 +14,68 @@
 					{% csrf_token %}
 					
 					<!-- Topic -->
-
-				<input type="text" class="form-control mb-2" required  name="topic" placeholder="Topic">
-
-					<!-- Description -->
-
-				<textarea class="form-control mb-2" required rows="5"
-				name="description" required > Description</textarea>
-
+					<label>Topic</label>
+					<input type="text" class="form-control mb-2" required  name="topic" placeholder="">
+					<!-- Description 	-->
+					<label >Description</label>
+					<textarea class="form-control mb-2" required rows="5"
+					name="description" required > </textarea>
 					<!-- Start date -->
-
-				<input type="date" required class="form-control mb-2" name="start_date" 
-				value="2000-01-21" placeholder="Topic">
-
-				<!-- End date -->
-
-				<input type="date" class="form-control mb-2" required name="end_date" value="2000-01-22" placeholder="Topic">
+					<label >Start date</label>
+					<input type="date" required class="form-control mb-2" name="start_date"
+					value="2000-01-21" placeholder="Topic">
+					<!-- End date -->
+					<label >End date</label>
+					<input type="date" class="form-control mb-2" required name="end_date" value="2000-01-22" placeholder="Topic">
+					
+					<!-- Estimated time -->
+					<label>Estimated time</label>
+					<input type="number" step="0.5" class="form-control mb-2" required name="estimated_time" >
+					<!-- Task type -->
+					
+					<label >Task type</label>
+					<select name="task_type" required class="form-control mb-2"  >
+						{% for i in addform.task_type %}
+							{{i}}
+						{% endfor %}
+					</select>
+					<!-- Priority -->
+					<label >Priority</label>
+					<select name="priority" required class="form-control mb-2"  >
+						{% for i in addform.priority %}
+							{{i}}
+						{% endfor %}
+					</select>
+					
+					
+					<!-- Implemeners -->
+					
+					<label >Implementers</label>
+						<select name="implementers" required class="form-control mb-2"  multiple>
+							{% for i in addform.implementers %}
+								{{i}}
+							{% endfor %}
+						</select>
+						<!-- Project -->
+						<label >Project</label>
+						<select name="project" required class="form-control mb-2" >
+							{% for i in  addform.project %}
+								{{i}}
+							{% endfor %}
+						</select>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" name="addform" class="btn btn-success">Add task</button>
+					</div>
+				</form>
 				
-				<!-- Estimated time -->
-
-				<input type="number" placeholder="Used time" step="0.5" class="form-control mb-2" required name="estimated_time" >
-
-				<!-- Task type -->
-
-				<div class="mb-2">Task type: {{addform.task_type}} </div>
-
-				<!-- Priority -->
-
-				<div class="mb-2">Priority: {{addform.priority}} </div>
 				
-				
-
-				<!-- Implemeners -->
-				
-				<div class="mb-2">Implementers: {{addform.implementers}}</div>
-
-				<!-- Project -->
-
-				<div class="mb-2">Project: {{addform.project}}</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" name="addform" class="btn btn-success">Save</button>
-				</div>
-			</form>
-			
-			
+			</div>
 		</div>
 	</div>
-</div>
-<!-- 					<div class="p-5">
-						
-					{{taskeditform.as_p}}
-					
-					</div> -->
+	<!-- 					<div class="p-5">
+			
+		{{taskeditform.as_p}}
+		
+	</div> -->

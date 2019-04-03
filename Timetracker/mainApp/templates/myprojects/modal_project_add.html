@@ -1,0 +1,46 @@
+<div class="modal fade" id="addproject" tabindex="-1" role="dialog" aria-labelledby="addproject" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title text-dark" id="addproject">Add new project</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true"></span>
+				</button>
+			</div>
+			
+			
+			<div class="modal-body text-dark">
+				<form  method="POST" >
+					{% csrf_token %}
+					<label>Project Name</label>
+					<input type="text" class="form-control mb-2" required  name="name">
+					<label>Short description (for preview)</label>
+					<input type="text" class="form-control mb-2" required  name="short_description" placeholder="Short description">
+					<label>Developers</label>
+					<select class="form-control mb-2" required name="developers" multiple>
+						{% for i in addproject.developers %}
+							{{i}}
+						{% endfor %}
+					</select>
+
+					<label> Full description </label>
+					<textarea name="full_description" class="mb-2" placeholder="Project description"></textarea>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" name="edittaskname" class="btn btn-success">Add project</button>
+					</div>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+	<script src="https://cloud.tinymce.com/5/tinymce.min.js?apiKey=mee61402nxlirgdcyh9j8pntavhne159wkdzp3z9hep9xyk2"></script>
+	<script>tinymce.init({ selector:'textarea' });</script>
+</div>
+
+<!-- 					<div class="p-5">
+		
+	{{taskeditform.as_p}}
+	
+</div> -->

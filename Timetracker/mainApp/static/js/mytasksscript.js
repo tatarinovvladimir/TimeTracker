@@ -1,5 +1,5 @@
 $("#mytasks_id").addClass("active");
-$('.addproject').hover(
+$('.addtask').hover(
     function() {
       $( this ).addClass('bg-dark');
 

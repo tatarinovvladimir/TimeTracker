@@ -5,6 +5,7 @@ from mainApp.models import Comment
 from mainApp.models import JournalPost
 from mainApp.models import Project
 
+
 class uploadProfileImgForm(forms.Form):
     avatarimage = forms.ImageField()
 
@@ -36,4 +37,11 @@ class TaskAddForm(forms.ModelForm):
         exclude = ['creator']
 
 
+
+class ProjectAddForm(forms.ModelForm):
+
+    class Meta(object):
+        model = Project
+        fields = ['name', 'short_description', 'full_description', 'developers']
+        exclude = ['author'] 
 

@@ -16,7 +16,7 @@ from mainApp.forms import TaskEditForm
 from mainApp.forms import TaskAddForm
 from mainApp.forms import AddComentForm
 from mainApp.forms import AddNoteForm
-
+from mainApp.forms import ProjectAddForm
 from django.core.mail import send_mail
 from django.conf import settings
 import os
@@ -77,14 +77,30 @@ def myprojects(request):
 
         user = User.objects.get(username=request.user.username)
         title = "My projects"
+        addproject = ProjectAddForm()
 
         if request.user.is_staff:
             project = Project.objects.filter()
         else:
             project = Project.objects.filter(developers=user.profile)
 
+        if request.POST:
+            addproject = ProjectAddForm(request.POST)
+            if addproject.is_valid():
+            
+                newform = addproject.save(commit=False)
+                newform.author = user.profile
+                newform.save()
+                addproject.save_m2m()
+                return HttpResponseRedirect(request.path)
+            else:
+                return HttpResponseRedirect(request.path)        
 
-        return render(request, "myprojects/myprojects.html", { "User": user, "title" : title, "project":project})
+            
+        
+
+        return render(request, "myprojects/myprojects.html", { "User": user, "title" : title, "project":project, 
+        'addproject' : addproject})
 
 @login_required(login_url="/log_in")
 def mytasks(request):
@@ -103,6 +119,7 @@ def mytasks(request):
 
         if request.POST:
             addform = TaskAddForm(request.POST)
+            
             print("post")
 
             if addform.is_valid():
@@ -120,6 +137,9 @@ def mytasks(request):
                 return HttpResponseRedirect(request.path)
             else:
                 return HttpResponseRedirect(request.path)
+
+
+
 
         return render(request, "mytasks/mytasks.html", {"User": user, "title" : title, "task" : task, 'addform' : addform})
 
@@ -159,6 +179,11 @@ def mytasksdetail(request, pk):
         old_task = Task.objects.get(id=pk)
         add_comment_form = AddComentForm()
         taskeditform = TaskEditForm()
+
+        taskeditform.fields['priority'].initial = task.priority
+        taskeditform.fields['task_type'].initial = task.task_type
+        taskeditform.fields['project'].initial = task.project
+
         chief_admin_group = Group.objects.filter(name="Chief Administrator")
         admin_group = Group.objects.filter(name="Administrator")
         moder_group = Group.objects.filter(name="Moderator")
@@ -170,13 +195,15 @@ def mytasksdetail(request, pk):
 
 
         user = User.objects.get(username=request.user.username)
-       
+
+
+
         if request.POST and "edittaskname" in request.POST:
             
             taskeditform = TaskEditForm(request.POST, instance=task)
             
-            if taskeditform.is_valid():
-                
+            if taskeditform.is_valid() and len(taskeditform.changed_data) > 0:
+               
                 subject = '{} was changed!'.format(task)
                 message = '''Hello! \n We have a few changes in {}. Please check it! \n \nList of changes: \n \n'''.format(old_task)
 

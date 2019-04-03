@@ -13,7 +13,7 @@ import os
 
 
 class Profile(models.Model):
-    Custom_User = models.OneToOneField(User, on_delete=models.CASCADE)
+    Custom_User = models.OneToOneField(User, on_delete=models.CASCADE, editable=False)
     profile_image = models.ImageField(upload_to="avatar", blank=True, null=True, default='avatar/default.jpg')
     date_of_birth = models.DateField(blank=True, null=True)
 

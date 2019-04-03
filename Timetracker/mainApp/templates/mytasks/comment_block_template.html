@@ -11,7 +11,7 @@
 				
 					<div class="{% if i.commentator.Custom_User.groups.all.0 in chief_admin_group %} chief_admin
 					{% elif i.commentator.Custom_User.groups.all.0 in admin_group %} admin
-					{% elif i.commentator.Custom_User.groups.all.0 in moder_group %} moder
+					{% elif i.commentator.Custom_User.groups.all.0 in moder_group %} moder deleted in v.1.2
 					{% else %} {% endif %}">
 					{{i.commentator}}
 					</div>
